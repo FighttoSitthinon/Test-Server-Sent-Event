@@ -1,19 +1,34 @@
-using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Net.ServerSentEvents;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using TestSSE.Models;
 
 namespace TestSSE.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(SseBroadcaster broadcaster) : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public ServerSentEventsResult<string> GetEvents(CancellationToken ct)
         {
-            return View();
+            return TypedResults.ServerSentEvents(broadcaster.Subscribe(ct));
+        }
+
+        [HttpPost]
+        public IActionResult SubmitRequest([FromBody] SubmitRequestRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            broadcaster.Broadcast(request.Message.Trim());
+            return Accepted();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

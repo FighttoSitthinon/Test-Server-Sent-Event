@@ -19,6 +19,7 @@ html {
 
 body {
   margin-bottom: 60px;
+  padding: 1.5em 0;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -28,4 +29,14 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+.message{
+  height: 80vh;
+  padding: 1em 1.5em;
+  max-height: 80vh;
+  overflow-y: scroll;
+  background-color: black;
+  color: #fffacb;
+  border-radius: 5px;
 }

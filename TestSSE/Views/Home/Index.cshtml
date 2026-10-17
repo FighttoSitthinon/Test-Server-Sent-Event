@@ -1,8 +1,22 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Server Sent Events";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="mb-3">Action</h4>
+            <form id="request-form" class="action">
+                <label for="request-message" class="form-label">Message</label>
+                <input id="request-message" class="form-control mb-3" type="text" maxlength="500" required />
+                <button id="submit-request" class="btn btn-primary" type="submit" disabled>Add Request</button>
+                <span id="connection-status" class="ms-2" role="status">Connecting to event stream...</span>
+                <div id="submit-status" class="mt-2" role="status"></div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h4 class="mb-3">Stream Data</h4>
+            <div class="message" id="message-data"></div>
+        </div>
+    </div>
 </div>

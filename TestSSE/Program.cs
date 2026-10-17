@@ -1,7 +1,10 @@
+using TestSSE;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<SseBroadcaster>();
 
 var app = builder.Build();
 
